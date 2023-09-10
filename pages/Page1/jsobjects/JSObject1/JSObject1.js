@@ -1,25 +1,25 @@
 export default {
-  generateTimeSlots: (rawData) => {
-    const startTime = moment.tz('10:00', 'HH:mm', 'Europe/Warsaw'); // Set the time zone
-    const endTime = moment.tz('22:00', 'HH:mm', 'Europe/Warsaw'); // Set the time zone
-    const callDuration = 30; // minutes
+  generateTimeSlots: (rawData, date, duration) => {
+    const startDateTime = moment.tz(`${date} 10:00`, 'YYYY-MM-DD HH:mm', 'Europe/Warsaw');
+    const endDateTime = moment.tz(`${date} 22:00`, 'YYYY-MM-DD HH:mm', 'Europe/Warsaw');
+    const callDuration = duration; // minutes
     const timeSlots = [];
   
-    let currentTime = startTime.clone();
+    let currentTime = startDateTime.clone();
   
     // Ensure that rawData has an "items" property and it is an array
     if (rawData && Array.isArray(rawData.items)) {
-      while (currentTime.isBefore(endTime)) {
+      while (currentTime.isBefore(endDateTime)) {
         const slotEndTime = currentTime.clone().add(callDuration, 'minutes');
   
         // Check if the slot end time is within the day and not conflicting with events
         if (
-          slotEndTime.isBefore(endTime) &&
+          slotEndTime.isBefore(endDateTime) &&
           !this.isSlotConflicting(currentTime, slotEndTime, rawData.items)
         ) {
           timeSlots.push({
-            start: currentTime.format('HH:mm'),
-            end: slotEndTime.format('HH:mm')
+            start: currentTime.format('HH:mm'), // Include the date
+            end: slotEndTime.format('HH:mm') // Include the date
           });
         }
   
@@ -34,13 +34,11 @@ export default {
     for (const event of events) {
       const eventStart = moment.tz(event.start.dateTime, 'Europe/Warsaw'); // Set the event's time zone
       const eventEnd = moment.tz(event.end.dateTime, 'Europe/Warsaw'); // Set the event's time zone
-  		
-			console.log(`eventStart: ${eventStart.format('HH:mm')} - eventEnd: ${eventEnd.format('HH:mm')}`);
-      console.log(`startTime: ${startTime.format('HH:mm')} - endTime: ${endTime.format('HH:mm')}`);
-			
+  
+      // Check if there is a date and time overlap between the time slot and the event
       if (
-        startTime.isSameOrBefore(eventEnd) &&
-        endTime.isSameOrAfter(eventStart)
+        startTime.isBefore(eventEnd) &&
+        endTime.isAfter(eventStart)
       ) {
         return true; // Conflict found
       }

@@ -23,6 +23,12 @@
       "jsArguments": [
         {
           "name": "rawData"
+        },
+        {
+          "name": "date"
+        },
+        {
+          "name": "duration"
         }
       ]
     },

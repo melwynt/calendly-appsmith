@@ -36,7 +36,7 @@
     "hideCard": false,
     "mobileRightColumn": 23,
     "parentColumnSpace": 12.578125,
-    "dynamicTriggerPathList": [],
+    "dynamicTriggerPathList": [{"key": "onOptionChange"}],
     "labelPosition": "Top",
     "sourceData": "[\n  {\n    \"label\": \"15 min Meeting\",\n    \"value\": \"15\"\n  },\n  {\n    \"label\": \"30 min Meeting\",\n    \"value\": \"30\"\n  },\n  {\n    \"label\": \"1 hour Meeting\",\n    \"value\": \"60\"\n  }\n]",
     "key": "j9ouuqi6wg",
@@ -54,5 +54,6 @@
     "responsiveBehavior": "fill",
     "mobileLeftColumn": 3,
     "maxDynamicHeight": 9000,
+    "onOptionChange": "{{resetWidget(\"eventsTable\", true);}}",
     "minDynamicHeight": 4
 }

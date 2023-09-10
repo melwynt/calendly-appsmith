@@ -140,7 +140,7 @@
     "textSize": "0.875rem",
     "widgetId": "m8qp3xo90o",
     "minWidth": 450,
-    "tableData": "{{\n(function() {\n    let rawData = fetch_calendar_events.data;\n\t\tconsole.log(rawData.items)\n    const timeSlots = JSObject1.generateTimeSlots(rawData);\n    return timeSlots;\n  }\n)()\n}}",
+    "tableData": "{{\n(function() {\n    let rawData = fetch_calendar_events.data;\n    let duration = Number(durationDropdown.selectedOptionValue)\n    const desiredDate = moment(slotDatePicker.selectedDate).format(\"YYYY-MM-DD\");\n    const timeSlots = JSObject1.generateTimeSlots(rawData, desiredDate, duration);\n\n    return timeSlots;\n  }\n)()\n}}",
     "label": "Data",
     "searchKey": "",
     "parentId": "0",
