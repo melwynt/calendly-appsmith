@@ -1,0 +1,11 @@
+{
+	"start": {
+		"dateTime": "{{moment.tz(slotDatePicker.formattedDate+" "+eventsTable.triggeredRow.slot.split(" - ")[0], "YYYY-MM-DD HH:mm", 'Europe/Warsaw').toISOString()}}"
+	},
+	"end": {
+		"dateTime": "{{moment.tz(slotDatePicker.formattedDate+" "+eventsTable.triggeredRow.slot.split(" - ")[1], "YYYY-MM-DD HH:mm", 'Europe/Warsaw').toISOString()}}"
+	},
+	"description": {{JSON.stringify((purposeInput.text))}},
+	"summary": "{{nameInput.text + " Meeting with Melwyn"}}",
+	"attendees": [{ "email": "{{emailInput.text.trim()}}" }]
+}

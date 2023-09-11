@@ -18,8 +18,9 @@ export default {
           !this.isSlotConflicting(currentTime, slotEndTime, rawData.items)
         ) {
           timeSlots.push({
-            start: currentTime.format('HH:mm'), // Include the date
-            end: slotEndTime.format('HH:mm') // Include the date
+            // start: currentTime.format('HH:mm'), // Include the date
+            // end: slotEndTime.format('HH:mm') // Include the date
+            slot: currentTime.format('HH:mm') + " - " + slotEndTime.format('HH:mm')
           });
         }
   
@@ -40,7 +41,15 @@ export default {
         startTime.isBefore(eventEnd) &&
         endTime.isAfter(eventStart)
       ) {
-        return true; // Conflict found
+        // return true; // Conflict found
+
+        // Check if all attendees have a "responseStatus" of "Declined"
+        const allDeclined = event.attendees.every(attendee => attendee.responseStatus === 'declined');
+				
+				// if not all have declined, return true
+        if (!allDeclined) {
+          return true; // Conflict found
+        }
       }
     }
   

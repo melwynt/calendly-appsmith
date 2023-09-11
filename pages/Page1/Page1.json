@@ -34,8 +34,8 @@
               "confirmBeforeExecute": false,
               "pluginType": "API",
               "jsonPathKeys": [
-                "moment(slotDatePicker.selectedDate).add(1,\"day\").format(\"YYYY-MM-DDT00:mm:ss+05:30\")",
-                "moment(slotDatePicker.selectedDate).format(\"YYYY-MM-DDT00:mm:ss+05:30\")"
+                "moment(slotDatePicker.formattedDate).add(1,\"day\").format(\"YYYY-MM-DDT00:mm:ss+05:30\")",
+                "moment(slotDatePicker.formattedDate).format(\"YYYY-MM-DDT00:mm:ss+05:30\")"
               ],
               "timeoutInMillisecond": 10000
             }
