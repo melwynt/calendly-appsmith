@@ -3,7 +3,7 @@
     "boxShadow": "none",
     "mobileBottomRow": 22,
     "widgetName": "Button2",
-    "onClick": "{{AddEvent.run().then(() => {\n  closeModal('Modal1');\n  resetWidget(\"eventsTable\", true);\n});}}",
+    "onClick": "{{AddEvent.run().then(() => {\n  closeModal('Modal1');\n  fetch_calendar_events.run();\n  resetWidget(\"eventsTable\", true);\n});}}",
     "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
     "displayName": "Button",
     "iconSVG": "/static/media/icon.05d209fafeb13a8569e3b4e97069d9ee.svg",

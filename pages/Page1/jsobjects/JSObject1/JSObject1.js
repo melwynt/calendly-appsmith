@@ -1,9 +1,10 @@
 export default {
+  globalTimeSlots: [],
   generateTimeSlots: (rawData, date, duration) => {
     const startDateTime = moment.tz(`${date} 10:00`, 'YYYY-MM-DD HH:mm', 'Europe/Warsaw');
     const endDateTime = moment.tz(`${date} 22:00`, 'YYYY-MM-DD HH:mm', 'Europe/Warsaw');
     const callDuration = duration; // minutes
-    const timeSlots = [];
+    let timeSlots = [];
   
     let currentTime = startDateTime.clone();
   
@@ -20,14 +21,28 @@ export default {
           timeSlots.push({
             // start: currentTime.format('HH:mm'), // Include the date
             // end: slotEndTime.format('HH:mm') // Include the date
-            slot: currentTime.format('HH:mm') + " - " + slotEndTime.format('HH:mm')
+            slot: currentTime.format('HH:mm') + " - " + slotEndTime.format('HH:mm'),
+            status: "free"
+          });
+        } else {
+          timeSlots.push({
+            // start: currentTime.format('HH:mm'), // Include the date
+            // end: slotEndTime.format('HH:mm') // Include the date
+            slot: currentTime.format('HH:mm') + " - " + slotEndTime.format('HH:mm'),
+            status: "booked"
           });
         }
   
         currentTime = slotEndTime.clone();
       }
     }
-  
+    this.globalTimeSlots = timeSlots.map(timeSlot => {
+      if (timeSlot.status === "free") {
+        return "#0000FF";
+      } else {
+        return "#FF0000";
+      }
+    })
     return timeSlots;
   },
   // Function to check if a time slot conflicts with events
@@ -45,8 +60,7 @@ export default {
 
         // Check if all attendees have a "responseStatus" of "Declined"
         const allDeclined = event.attendees.every(attendee => attendee.responseStatus === 'declined');
-				
-				// if not all have declined, return true
+
         if (!allDeclined) {
           return true; // Conflict found
         }

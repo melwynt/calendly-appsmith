@@ -6,7 +6,12 @@
     "pluginType": "JS",
     "actions": [],
     "archivedActions": [],
-    "variables": [],
+    "variables": [
+      {
+        "name": "globalTimeSlots",
+        "value": "[]"
+      }
+    ],
     "userPermissions": []
   },
   "id": "Page1_JSObject1",
